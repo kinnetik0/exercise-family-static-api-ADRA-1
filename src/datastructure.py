@@ -1,18 +1,21 @@
-from random import randint
-
 class FamilyStructure:
     def __init__(self, last_name):
         self.last_name = last_name
         self._next_id = 1
         self._members = []
 
-    def _generateId(self):
-        return randint(0, 99999999)
+    # This method generates a unique 'id' when adding members into the list (you shouldn't touch this function)
+    def _generate_id(self):
+        generated_id = self._next_id
+        self._next_id += 1
+        return generated_id
 
     def add_member(self, member):
-        member["id"] = self._generateId()
         member["last_name"] = self.last_name
+        member["id"] = self._generate_id()
+        member["lucky_numbers"] = list(member.get("lucky_numbers", set()))
         self._members.append(member)
+
         return member
 
     def delete_member(self, id):
@@ -21,25 +24,15 @@ class FamilyStructure:
                 self._members.remove(member)
                 return {"done": True}
         return {"done": False}
+            
 
     def get_member(self, id):
         for member in self._members:
-            if member["id"] == id:
+            if member["id"] == int(id):
                 return member
+            
         return None
 
-    # def update_member(self, id, member):
-    #     for i, existing_member in enumerate(self._members):
-    #         if existing_member["id"] == id:
-    #             self._members[i] = {
-    #                 "id": id,
-    #                 "last_name": self.last_name,
-    #                 "first_name": member["first_name"],
-    #                 "age": member["age"],
-    #                 "lucky_numbers": member["lucky_numbers"]
-    #             }
-    #             return {"done": True}
-    #     return {"done": False}
-
+    # This method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members

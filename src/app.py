@@ -12,7 +12,7 @@ CORS(app)
 jackson_family = FamilyStructure("Jackson")
 
 John = {
-    "first_name": "John",
+    "first_name": "Jonh",
     "last_name": jackson_family.last_name,
     "age": 33,
     "lucky_numbers": [7, 13, 22]
@@ -80,17 +80,7 @@ def delete_member(member_id):
     else:
         return jsonify({"message": "Member not found"}), 404
 
-# Actualizar un miembro por ID
-# @app.route('/member/<int:member_id>', methods=['PATCH'])
-# def update_member(member_id):
-#     data = request.get_json()
-#     result = jackson_family.update_member(member_id, data)
-#     if result["done"]:
-#         return jsonify(result), 200
-#     else:
-#         return jsonify({"message": "Member not found"}), 404
 
-# Esto solo se ejecuta si se ejecuta $ python src/app.py
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
     app.run(host='0.0.0.0', port=PORT, debug=True)
