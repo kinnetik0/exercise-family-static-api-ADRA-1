@@ -12,8 +12,9 @@ class FamilyStructure:
 
     def add_member(self, member):
         member["last_name"] = self.last_name
-        member["id"] = self._generate_id()
-        member["lucky_numbers"] = list(member.get("lucky_numbers", set()))
+        if "id" not in member: 
+            member["id"] = self._generate_id()
+        # member["lucky_numbers"] = list(member.get("lucky_numbers", set()))
         self._members.append(member)
 
         return member
